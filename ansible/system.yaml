@@ -1,0 +1,7 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+      # creo un utente con chiave pubblica/privata ssh, che verra' usata come deploy key su Bitbucket
+    - name: Create ubuntu user
+      user: name=ubuntu generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa

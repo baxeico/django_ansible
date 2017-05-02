@@ -1,0 +1,18 @@
+---
+- name: Copy configuration files
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: nginx config file
+      template: src=../config/nginx.conf dest=/etc/nginx/sites-enabled/django
+      register: nginx_config
+    - name: nginx restart
+      service: name=nginx state=restarted
+      when: nginx_config.changed
+    - name: uwsgi config file
+      template: src=../config/uwsgi.ini dest=/etc/uwsgi/apps-enabled/django.ini
+      register: uwsgi_config
+    - name: uwsgi restart
+      service: name=uwsgi state=restarted
+      when: uwsgi_config.changed
