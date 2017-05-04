@@ -4,7 +4,7 @@ from os import environ
 
 from .base import *
 
-ALLOWED_HOSTS = ['qs.guguweb.com']
+ALLOWED_HOSTS = ['yourproject.example.com']
 
 DATABASES = {
     'default': dj_database_url.config()
