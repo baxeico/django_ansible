@@ -1,0 +1,15 @@
+# You can specify a custom docker image from Docker Hub as your build environment.
+image: python:2.7.16
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy to prod
+          deployment: Production
+          caches:
+            - pip
+          script:
+            - pip install ansible==2.8.0
+            - cd ansible
+            - ansible-playbook -i ./hosts deploy.yaml
